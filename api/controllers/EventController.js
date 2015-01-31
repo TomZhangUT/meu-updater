@@ -17,10 +17,44 @@ module.exports = {
 	},
 
 	create: function (req, res, next) {
-		Event.create(req.params.all(), function eventCreated(err, bus){
+		Event.create(req.params.all(), function eventCreated(err, event){
 			if (err) {
 				return next(err);
 			}
+
+			var schedule = require('node-schedule');
+			var date = event.date;
+			 
+			var j = schedule.scheduleJob(date, function(){
+			    console.log(event.text);
+
+			    User.find(function foundUsers (err, users){
+					if (err) return next(err);
+					
+					var registration_ids = users.map(function extractRegistrationID(item){
+						var id = item.registration_id.replace(/['"]+/g, '');
+						console.log(id);
+						return id;
+					});
+
+					if (registration_ids.length > 0){
+						var data = {
+							"data": {
+								"text" : event.text,
+							},
+							"registration_ids": registration_ids
+						};
+						
+						GCM.sendData('/gcm/send', 'POST', data, function(data){
+							console.log(JSON.stringify(data));
+						})
+					}else{
+						console.log("No Users");
+					}
+					
+				});
+			});
+
 			res.redirect('/event/index');
 		});
 	},
