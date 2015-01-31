@@ -12,7 +12,8 @@ module.exports = {
   attributes: {
   	registration_id: {
   		type: 'string',
-  		required: true
+  		required: true,
+  		unique: true
   	},
   }
 };

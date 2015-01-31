@@ -72,13 +72,32 @@ module.exports = {
 			console.log("body: " + JSON.stringify(body));
 		});
 		*/
-		var data = {
-			"registration_ids": [ "42" ]
-		};
-		
-		GCM.sendData('/gcm/send', 'POST', data, function(data){
-			console.log(JSON.stringify(data));
-		})
+
+		User.find(function foundUsers (err, users){
+			if (err) return next(err);
+			
+			var registration_ids = users.map(function extractRegistrationID(item){
+				var id = item.registration_id.replace(/['"]+/g, '');
+				console.log(id);
+				return id;
+			});
+
+			if (registration_ids.length > 0){
+				var data = {
+					"data": {
+						"text" : "Kawaii in the Streets, Sitanpai in the Sheets",
+					},
+					"registration_ids": registration_ids
+				};
+				
+				GCM.sendData('/gcm/send', 'POST', data, function(data){
+					console.log(JSON.stringify(data));
+				})
+			}else{
+				console.log("No Users");
+			}
+			
+		});
 
 
 		res.redirect('/event/index');
