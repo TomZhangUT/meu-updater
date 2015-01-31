@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="/styles/registration.css">
+<link rel="stylesheet" href="/styles/manage.css">
+<% block('localScripts', '<script src="/js/jquery.tablesorter.min.js"></script>') %>
+<% block('localScripts', '<script src="/js/manage.js"></script>') %>
+
+<div class="container">
+    <h3>Users</h3>
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Registration Id</th>
+            <th></th>
+        </tr>
+
+        <% _.each(users, function(user) { %>
+        <tr data-id="<%= user.id %>" data-model="user">
+            <td><%= user.id %></td>
+            <td><%= user.registration_id %></td>
+            <td>
+                <form action="/user/destroy/<%= user.id %>" method="POST">
+                    <input type="hidden" name="_method" value="delete" />
+                    <input type="submit" class="btn btn-sm btn-danger" value="Delete"/>
+                    <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+                </form>
+            </td>
+        </tr>
+        <%  }) %>
+    </table>
+</div>

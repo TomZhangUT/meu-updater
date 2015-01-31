@@ -1,0 +1,57 @@
+<!-- Default home page -->
+<!-- Header -->
+<header>
+    <div class="container">
+        <h3>Schedule</h3>
+        <table class="table">
+            <tr>
+                <th>Time</th>
+                <th>Text</th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            <% _.each(events, function(event) { %>
+            <tr data-id="<%= event.id %>" data-model="user">
+                <td><%= event.date %></td>
+                <td><%= event.text %></td>
+                <td><a href="/event/edit/<%= event.id %>" class="btn btn-sm btn-warning">Edit</a></td>
+                <td>
+                    <form action="/event/destroy/<%= event.id %>" method="POST">
+                        <input type="hidden" name="_method" value="delete" />
+                        <input type="submit" class="btn btn-sm btn-danger" value="Delete"/>
+                        <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+                    </form>
+                </td>
+            </tr>
+            <%  }) %>
+        </table>
+    </div>
+</header>
+
+<!-- About Section -->
+<section class="success" id="Add">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Add An Event</h2>
+                <hr class="star-light">
+            </div>
+        </div>
+        <div class="row">
+            <form role="form" action="/event/create" method="POST" class="form-inline">
+              <div class="form-group">
+                <label for="eventDate">Date</label>
+                <input type="date" class="form-control" id="eventDate" name="eventDate">
+                <label for="eventTime">Time</label>
+                <input type="time" class="form-control" id="eventTime" name="eventTime"> 
+              </div>
+              <div class="form-group">
+                <label for="text">Update Text</label>
+                <input type="text" class="form-control" id="text" placeholder="UofT Hacks Food!" name="text">
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div>
+</section>
