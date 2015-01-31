@@ -51,27 +51,6 @@ module.exports = {
 	},
 
 	send: function (req, res, next){
-		/*
-		var request = require('request');
-
-		var options = {
-		  uri: 'https://android.googleapis.com/gcm/send',
-		  method: 'POST',
-		  headers: {
-		  	'Authorization' : 'key=AIzaSyDPW-nBiDrpDMEdlajq-tLo6EshcSn_INE',
-		  	'Content-Type': 'application/json',
-		  },
-		  json: {
-		    "registration_ids": [ "42" ]
-		  }
-		};
-
-		console.log("sending request!");
-		request(options, function (error, response, body) {
-			console.log("response: " + JSON.stringify(response));
-			console.log("body: " + JSON.stringify(body));
-		});
-		*/
 
 		User.find(function foundUsers (err, users){
 			if (err) return next(err);
@@ -86,6 +65,39 @@ module.exports = {
 				var data = {
 					"data": {
 						"text" : "Kawaii in the Streets, Sitanpai in the Sheets",
+					},
+					"registration_ids": registration_ids
+				};
+				
+				GCM.sendData('/gcm/send', 'POST', data, function(data){
+					console.log(JSON.stringify(data));
+				})
+			}else{
+				console.log("No Users");
+			}
+			
+		});
+
+
+		res.redirect('/event/index');
+	},
+
+	broadcast: function (req, res, next){
+		var message = req.param('message');
+		
+		User.find(function foundUsers (err, users){
+			if (err) return next(err);
+			
+			var registration_ids = users.map(function extractRegistrationID(item){
+				var id = item.registration_id.replace(/['"]+/g, '');
+				console.log(id);
+				return id;
+			});
+
+			if (registration_ids.length > 0){
+				var data = {
+					"data": {
+						"text" : message,
 					},
 					"registration_ids": registration_ids
 				};
