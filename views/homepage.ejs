@@ -1,82 +1,55 @@
 <!-- Default home page -->
 <!-- Header -->
 <header>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="jumbotron text-center">
-                  <h1>MeU Schedule Updater</h1>
-                  <p>Update your attendees in real time</p>
-                  <p><a class="btn btn-primary btn-lg" href="/event/demo" role="button">Try the Demo</a></p>
-                </div>
-            </div>
+    <div class="row" id="banner">
+        <div class="col-lg-12 text-center">
+            <div class="banner-description">
+                <h1>MeU Updater</h1>
+                <p>Update your attendees in real time</p>
+                <p><a class="btn btn-primary btn-lg" href="/event/demo" role="button">Try the Demo</a></p>
+            <div>
         </div>
     </div>
 </header>
 
+<!-- About Section -->
 <section id="about">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2>About</h2>
                 <hr class="star-light">
-				<h4>A easy management tool for event planners to coordinate
-				information to event attendees</h4>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- About Section -->
-<section id="workings">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2>How it works</h2>
-                <hr class="star-light">
 			</div>
 		</div>
-		<div class="row">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                MeU Updater allows event coordinators to easily send information to event attendees. Users are allowed to automatically set update times to MeU LED arrays worn by event volunteers. Event coordinators can also immediately broadcast information to all subscribed MeU's to provide the best possible event experience.
+            </div>
+        </div>
+		<div class="row" style="padding-top: 50px">
 			<div class="col-md-4 text-center">
 				<h3> MeU </h3>
 				<h4> LED Matrix</h4>
-				<img src="./images/MEU.png" width=200 height=200/>
+                <a href="https://github.com/MeULEDs/MeU_Long_Teensy_WS2812_v3">
+                    <img src="/images/MEU.png" width=200 height=200/>
+                </a>
 			</div>
 				
 			<div class="col-md-4 text-center">
 				<h3> Web App </h3>
 				<h4> Event Management Portal </h4>
-				<img src="./images/database256.gif" width=200 height=180/>
+                <a href="/event/demo">
+				    <img src="/images/database.png" width=200 height=200/>
+                </a>
 			</div>
 				
 			<div class="col-md-4 text-center">
 				<h3> Android </h3>
 				<h4> Pushes data to MeU </h4>
-				<img src="./images/android.jpg" width=200 height=200/>
+                <a href="/images/MeuUpdater.apk">
+                    <img src="/images/android.jpg" width=200 height=200/>
+                </a>
 			</div>
-        </div>
-    </div>
-</section>
-
-<section id="trydemo">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2>Instructions for Demo</h2>
-                <hr class="star-light">
-				<ol>
-				<li>Download the app located <a href="./images/MeuUpdater.apk">here</a> </li>
-				
-				<li>Turn on the device bluetooth and connect to the MeU via the device settings. </li>
-				
-				<li>Open the app and refresh the bluetooth list. Find the MeU and push the Connect button.
-				If there are multiple devices available, choose the bluetooth address that starts with 00:06:66</li>
-				
-				<li>On the web app, type a message and broadcast it to display it on the MeU </li>
-				
-				<li>On the web app, create an event in order to update the MeU at that time </li>
-				</ol>
-            </div>
         </div>
     </div>
 </section>

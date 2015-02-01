@@ -1,0 +1,11 @@
+
+.banner-description{
+	padding-top: 120px;
+	color: #FFF;
+}
+
+#banner{
+	height: 400px;
+	background-size: 100%;
+	background-image: url("/images/banner.jpg");
+}

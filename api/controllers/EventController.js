@@ -57,17 +57,6 @@ module.exports = {
 		});
 	},
 
-	edit: function (req, res, next){
-		Event.findOne(req.param('id'), function foundEvent(err, event){
-			if (err) return next(err);
-			if (!event) return next();
-
-			res.view({
-				event: event,
-			});
-		});
-	},
-
 	destroy: function (req, res, next){
 		Event.findOne(req.param('id'), function foundEvent (err, event){
 			if (err) return next(err);
@@ -78,7 +67,7 @@ module.exports = {
 				if (err) return next (err);
 			});
 
-			res.redirect('/event/demo');
+			res.send(200);
 		});
 	},
 
