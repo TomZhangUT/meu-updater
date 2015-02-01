@@ -6,11 +6,11 @@
  */
 
 module.exports = {
-	index: function(req, res, next){
+	demo: function(req, res, next){
 		Event.find({sort: 'date ASC'}, function foundEvents (err, events){
 			if (err) return next(err);
 			
-			res.view("homepage", {
+			res.view({
 				events: events,	
 			})
 		})
@@ -26,14 +26,12 @@ module.exports = {
 			var date = event.date;
 			 
 			var j = schedule.scheduleJob(date, function(){
-			    console.log(event.text);
 
 			    User.find(function foundUsers (err, users){
 					if (err) return next(err);
 					
 					var registration_ids = users.map(function extractRegistrationID(item){
 						var id = item.registration_id.replace(/['"]+/g, '');
-						console.log(id);
 						return id;
 					});
 
@@ -55,7 +53,7 @@ module.exports = {
 				});
 			});
 
-			res.redirect('/event/index');
+			res.redirect('/event/demo');
 		});
 	},
 
@@ -80,7 +78,7 @@ module.exports = {
 				if (err) return next (err);
 			});
 
-			res.redirect('/event/index');
+			res.redirect('/event/demo');
 		});
 	},
 
@@ -91,7 +89,6 @@ module.exports = {
 			
 			var registration_ids = users.map(function extractRegistrationID(item){
 				var id = item.registration_id.replace(/['"]+/g, '');
-				console.log(id);
 				return id;
 			});
 
@@ -113,7 +110,7 @@ module.exports = {
 		});
 
 
-		res.redirect('/event/index');
+		res.redirect('/event/demo');
 	},
 
 	broadcast: function (req, res, next){
@@ -146,7 +143,7 @@ module.exports = {
 		});
 
 
-		res.redirect('/event/index');
+		res.redirect('/event/demo');
 	}
 };
 
